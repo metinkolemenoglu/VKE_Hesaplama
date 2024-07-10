@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vücut Kitle Endeksi Hesaplayıcı</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Vücut Kitle Endeksi Hesaplayıcı</h1>
+        <input type="number" id="weight" placeholder="Kilonuzu kg cinsinden girin">
+        <input type="number" id="height" placeholder="Boyunuzu cm cinsinden girin">
+        <button onclick="calculateBMI()">Hesapla</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function calculateBMI() {
+            let weight = document.getElementById('weight').value;
+            let height = document.getElementById('height').value;
+            
+            if (weight && height) {
+                height = height / 100; // Boyu metre cinsine çevir
+                let bmi = (weight / (height * height)).toFixed(2); // BMI hesapla ve iki ondalık basamak göster
+                
+                let resultText;
+                if (bmi < 18.5) {
+                    resultText = `Vücut Kitle Endeksiniz: ${bmi} (Zayıf)`;
+                } else if (bmi < 24.9) {
+                    resultText = `Vücut Kitle Endeksiniz: ${bmi} (Normal kilolu)`;
+                } else if (bmi < 29.9) {
+                    resultText = `Vücut Kitle Endeksiniz: ${bmi} (Fazla kilolu)`;
+                } else {
+                    resultText = `Vücut Kitle Endeksiniz: ${bmi} (Obez)`;
+                }
+
+                document.getElementById('result').innerText = resultText;
+            } else {
+                alert('Lütfen hem kilo hem de boy bilgilerini girin.');
+            }
+        }
+    </script>
+</body>
+</html>
